@@ -1,7 +1,8 @@
 package parser;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 /*
  * Här tänker jag att man hade kunnat flertråda men då hade man nog fått göra det i Analysern.
@@ -11,11 +12,12 @@ import java.util.Set;
 public class GeneralWordCounter implements TextProcessor{
 	
 	protected Set<String> set;
-	protected HashMap<String, Integer> wordMap = new HashMap<String,Integer>();
+	protected Map<String, Integer> wordMap;
 
 	
 	public GeneralWordCounter(Set<String> s) {
 		this.set = s;
+		this.wordMap = new TreeMap<String,Integer>();
 	
 	}
 
@@ -41,7 +43,7 @@ public class GeneralWordCounter implements TextProcessor{
 	public String report() {
 		StringBuilder reportBuilder = new StringBuilder();
 		  wordMap.keySet().stream()
-	        .forEach(word -> { if(wordMap.get(word)>=50)
+	        .forEach(word -> { if(wordMap.get(word)>=0)
 	            reportBuilder.append(word).append(": ").append(wordMap.get(word)).append("\n");
 	        });
 		return reportBuilder.toString().trim();
