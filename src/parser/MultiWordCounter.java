@@ -3,13 +3,10 @@ package parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MultiWordCounter implements TextProcessor{
 	
 	private HashMap<String, Integer> wordMap;
-	private final ExecutorService executorService = Executors.newFixedThreadPool(4);;
 	
 	public MultiWordCounter(String[] words) {
 		wordMap = new HashMap<String,Integer>();
@@ -31,9 +28,11 @@ public class MultiWordCounter implements TextProcessor{
 	@Override
 	public String report() {
 		StringBuilder reportBuilder = new StringBuilder();
-		wordMap.forEach((word,count)->{
-			reportBuilder.append(word).append(": ").append(count).append("\n");
-		});
+		  wordMap.keySet().stream()
+	        .sorted() 
+	        .forEach(word -> {
+	            reportBuilder.append(word).append(": ").append(wordMap.get(word)).append("\n");
+	        });
 		return reportBuilder.toString().trim();
 	}
 	

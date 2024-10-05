@@ -26,5 +26,10 @@ class TextAnalyzerTest {
         TextAnalyzer analyzer = new TextAnalyzer(new TextProcessor[] {new SingleWordCounter("nils"), new SingleWordCounter("norge")});
         assertEquals("nils: 3\nnorge: 2", analyzer.analyzeText(scanner));
     }
+    void analyzeText3() throws FileNotFoundException {
+        Scanner scanner = ScannerFactory.scannerForNaturalLanguage("test_data/nils_norway.txt");
+        TextAnalyzer analyzer = new TextAnalyzer(new TextProcessor[] {new SingleWordCounter("nils"), new SingleWordCounter("norge")});
+        assertEquals("nils: 3\nnorge: 2", analyzer.analyzeText(scanner));
+    }
 
 }

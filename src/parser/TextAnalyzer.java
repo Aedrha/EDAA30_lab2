@@ -35,7 +35,7 @@ public class TextAnalyzer {
         return reportBuilder.toString().trim();
     }
     private void textStream(Scanner s) {
-    	s.useDelimiter("\\W+");
+    	s.useDelimiter("[^\\p{L}]+");
     	s.tokens().map(String::toLowerCase)
     	.forEach(word-> processorList.forEach(t->t.process(word)));
     }
